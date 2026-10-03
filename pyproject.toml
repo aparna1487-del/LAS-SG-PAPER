@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "las-sg"
+version = "0.1.0"
+description = "Research implementation of the LAS-SG smart-grid authentication protocol"
+requires-python = ">=3.10"
+dependencies = ["cryptography>=42.0"]
+
+[project.optional-dependencies]
+test = ["pytest>=8.0"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-q"

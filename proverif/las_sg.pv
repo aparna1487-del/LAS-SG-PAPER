@@ -1,0 +1,26 @@
+(* LAS-SG symbolic model skeleton.
+   This abstracts ECC and AEAD as ideal constructors. It is intentionally
+   separate from the concrete Python implementation. *)
+free c: channel.
+free h: bitstring -> bitstring.
+free mac: bitstring * bitstring -> bitstring.
+fun senc(bitstring, bitstring): bitstring.
+reduc forall x: bitstring, k: bitstring; sdec(senc(x,k),k) = x.
+
+free smid: bitstring [private].
+free st: bitstring [private].
+free mk: bitstring [private].
+
+fun session(bitstring, bitstring, bitstring, bitstring): bitstring.
+
+query attacker(mk).
+query attacker(st).
+query attacker(session(smid, st, "asm", "cn")).
+
+(* Replace the abstract processes below with the final audited transcript
+   and add inj-event correspondence queries after the concrete message
+   semantics are frozen. *)
+process
+  out(c, senc(smid, mk));
+  in(c, _x: bitstring);
+  0
